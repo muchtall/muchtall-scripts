@@ -5,7 +5,7 @@ hwtime=`sudo hwclock --test | grep "^Hw clock time" | sed -re 's/.*= ([0-9]+) se
 vmtime=`date +%s`
 timediff=$(($hwtime - vmtime))
 if [ "$timediff" -gt "${threshold}" ] || [ "$timediff" -lt "-${threshold}" ] ; then
-  # If not running interactively, don't do anything
+  # If not running interactively don't spam the cron logs
   case $- in
         *i*) ;;
     *) echo "Time difference ($timediff) drifted by more than +/- ${threshold}s. Syncing to hardware time.";;
