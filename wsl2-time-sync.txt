@@ -1,0 +1,17 @@
+cat << EOF > ~/bin/wsl2-timesync.sh
+#!/bin/bash
+threshold=5
+hwtime=`sudo hwclock --test | grep "^Hw clock time" | sed -re 's/.*= ([0-9]+) seconds since 1969/\1/g'`
+vmtime=`date +%s`
+timediff=$(($hwtime - vmtime))
+if [ "$timediff" -gt "${threshold}" ] || [ "$timediff" -lt "-${threshold}" ] ; then
+  # If not running interactively, don't do anything
+  case $- in
+        *i*) ;;
+    *) echo "Time difference ($timediff) drifted by more than +/- ${threshold}s. Syncing to hardware time.";;
+  esac
+  sudo hwclock -s
+fi
+EOF
+chmod u+x ~/bin/wsl2-timesync.sh
+if [ "`sudo grep wsl2-timesync.sh /etc/crontab | grep -Pv "^\s*#" | wc -l`" -eq "0" ] ; then sudo bash -c "echo -e \"* * * * *\troot\t`realpath ~/bin/wsl2-timesync.sh`\" >> /etc/crontab" ; fi
