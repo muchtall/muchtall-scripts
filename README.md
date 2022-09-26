@@ -10,7 +10,7 @@ Just a collection of scripts I've created and accumulated over the years
     * Example usage: ```diskusage.sh /var/log/```
 * AutoHotKey (AHK)
   * **Cleanup PuTTY Windows.ahk**: Closes out disconnected PuTTY sessions that have been cluttering up your taskbar.
-  * **PuttyFontSize.ahk**:  Resizes the current font in PuTTY to large (14) or small (8) by pressing Ctrl + Shift + = __or__ Ctrl + Shift + -
+  * **PuttyFontResize.ahk**:  Resizes the current font in PuTTY to large (14) or small (8) by pressing Ctrl + Shift + = __or__ Ctrl + Shift + -
 * Misc
   * **wsl2-time-sync.txt**: Workaround for https://github.com/microsoft/WSL/issues/5324
     * Copy/paste the contained commands to set up the script
